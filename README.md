@@ -11,8 +11,10 @@ get_pagerank()-Returns PageRank values for a list of provided wiki article IDs
 
 get_pageview() - Returns the number of page views that each of the provide wiki articles had
 
-binary_search_by_index(query, index, N=-1) - implementation of the title and anchor search
+get_resault_for_query_binary_anchor(index, query, typeIndex, N=-1) - implementation of anchor search
 
-search_by_body_index(query_to_search, N=-1) - implementation of the body search using cosine similarity for all the wiki articles
+get_resault_for_query_by_title(index, query, typeIndex, N=-1) - implementation of title search
 
-build_inverted_index()- Builds an indexer for the entire english wiki corpus
+my_get_topN_score_for_queries(query_to_search, index, N=3) - implementation of body search with cosine similarity
+
+
