@@ -151,7 +151,7 @@ def search():
     if len(query_tokens) == 0:
         return jsonify(res)
     original_query_token = query_tokens.copy()
-
+    # for using word2Vec model
     # if len(q) / len(query_tokens) >= 2:
     #     query_tokens = add_word2vec(query_tokens)
 
@@ -163,10 +163,8 @@ def search():
         if len(final_score) == 0 and len(title_score) == 0:
             return jsonify([])
         avg_title, avg_body = calc_average_helper(title_score), calc_average_helper(body_candidates)
-        #print(avg_title)
         title_weight = avg_title / (avg_body + avg_title)
         body_weight = avg_body / (avg_body + avg_title)
-        #print(title_weight,body_weight)
         final_score = merge_results(title_score, body_candidates, len(original_query_token), title_weight, body_weight,N)
 
     page_view = list(map(lambda x: (x[0], get_page_view([x[0]])[0]), final_score[:N]))
@@ -178,8 +176,6 @@ def search():
     for tup in res_second_check:
         if tup not in res:
             res.append(tup)
-    #for tup in res:
-        #print(tup[0],tup[1])
     return jsonify(res)
 
 
@@ -433,7 +429,6 @@ def change_to_title(lst_to_convert, search_method="body"):
         if tup[1] >= avg_special:
             title = app.all_docs_len_table[str(tup[0])][0]
             res.append((int(tup[0]), title))
-            #print(tup[1], tup[0],title)
     return res
 
 
